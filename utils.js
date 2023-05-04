@@ -8,7 +8,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
 
 // openAI api configs
-const apiKey = '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';
+const apiKey = 'issa secret!';
 const configuration = new Configuration({apiKey});
 const openai = new OpenAIApi(configuration);
 
@@ -55,7 +55,7 @@ async function query(instruction) {
                 let content = message.match(/"content":"(.*?)"}/);
                 complete_message += content[1];
 
-                if (num_tokens_received++ % 10 === 0) {
+                if (num_tokens_received++ % 8 === 0) {
                     console.clear();
                     console.log(`Generating response for instruction '${instruction}':\n\n`);
                     console.log(unescapeString(complete_message).replace(/\\n/g, '\n'));

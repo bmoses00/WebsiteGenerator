@@ -34,7 +34,79 @@ const prompts = {
     generate_js: (task, html) => `
     The task is ${task}. The HTML is ${html}. Generate JS code which accomplishes the functionality
     required by the task, using the given HTML code.`,
-    generate_expanded_task: task => `output a clearer and more well-defined version of the task below: ${task}`
+    generate_expanded_task: task => `create a more detailed description of the following task, while 
+    still keeping it simple: ${task}`,
+    generate_component_hierarchy: task => `
+    create a react component hierarchy for the following task:
+
+${task}
+
+give me a valid JSON output only, no other text output. Here's an example of what I want for a todo app:
+
+{
+  "TodoList": {
+    "state": [
+      "todos",
+      "filter"
+    ],
+    "methods": [
+      "addTodo",
+      "toggleTodo",
+      "deleteTodo",
+      "setFilter"
+    ],
+    "childComponents": [
+      "TodoForm",
+      "TodoFilter",
+      "TodoItem"
+    ]
+  },
+  "TodoForm": {
+    "props": [
+      "onAddTodo"
+    ],
+    "childComponents": []
+  },
+  "TodoFilter": {
+    "props": [
+      "onSetFilter",
+      "currentFilter"
+    ],
+    "childComponents": []
+  },
+  "TodoItem": {
+    "props": [
+      "todo",
+      "onToggleTodo",
+      "onDeleteTodo"
+    ],
+    "childComponents": []
+  }
+}`,
+    generate_implementation: (expanded_task, component_description, hierarchy, previous) => `
+    this is your problem description: ${expanded_task}
+
+    this is the react component hierarchy: ${hierarchy}
+
+    this is the code for the parent of this component: ${previous}
+
+    your task is to generate a functional react component for ${component_description}.
+    
+1. Give me code only, no other output.
+2. Make sure that you import the child classes
+3. Make sure that you export the function at the end
+4. import '../styles/<component_name>.css at the beginning
+
+    `,
+    generate_style: (expanded_task, hierarchy, implementation) => `
+    this is the task :${expanded_task}.
+    
+    this is the component hierarchy: ${hierarchy}.
+    
+    this is the component implementation: ${implementation}.
+
+    your task is to generate CSS styling for this component. give me a valid css file, any non-css should be in comments.
+    `
 }
 
 module.exports = { prompts }
