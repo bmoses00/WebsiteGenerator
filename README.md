@@ -1,6 +1,8 @@
 # WebsiteGenerator
 
-All files were created by us, we did not base the code off of anyone else. This project requires nodejs in order to run. We used gpt3.5-turbo API, so we did not train any models ourselves. 
+All files were created by us, we did not base the code off of anyone else. 
+This project requires Node.js in order to run. 
+We used gpt3.5-turbo API, so we did not train any models ourselves. 
 
 OPTION A: (use the testing program to generate programs in v1, v2, v3 for each prompt in the prompts array in the scripts/testing.js file)
 
