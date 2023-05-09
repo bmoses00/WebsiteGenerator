@@ -8,7 +8,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
 
 // openAI api configs
-const apiKey = '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';
+const apiKey = 'sk-'; // INSERT KEY HERE
 const configuration = new Configuration({apiKey});
 const openai = new OpenAIApi(configuration);
 
@@ -31,6 +31,7 @@ async function query(instruction) {
         let complete_message = '';
         let num_tokens_received = 0;
 
+        try {
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: 'user', content: instruction }],
@@ -38,8 +39,16 @@ async function query(instruction) {
             stream: true,
         }, { responseType: 'stream' });
 
+        let stop = false;
+
         res.data.on('data', data => {
-            let messages = data.toString().split('data');
+            console.log('DATA', data.toString());
+            if (stop === true) {
+                console.log("Ball Cracker Motherfucker");
+                process.exit();
+            }
+            let messages = data.toString().split('data:');
+
             for (let message of messages) {
                 if (message === '' || message.includes('"role":"assistant"') || message.includes('"finish_reason":"stop"'))
                     continue;
@@ -51,17 +60,29 @@ async function query(instruction) {
                     resolve(unescapeString(complete_message));
                     return;
                 }
-
-                let content = message.match(/"content":"(.*?)"}/);
-                complete_message += content[1];
                 
-                if (num_tokens_received++ % 10 === 0 && instruction.includes("todo")) {
+                // console.log(message);
+                
+                let content = message.match(/"content":"(.*?)"}/);
+                if (content != null) {
+                    complete_message += content[1];
+
+                }
+                else {
+                    stop = true;
+                }
+                
+                if (num_tokens_received++ % 150 === 0) {
                     console.clear();
                     console.log(`Generating response for instruction '${instruction}':\n\n`);
                     console.log(unescapeString(complete_message).replace(/\\n/g, '\n'));
                 }
             }
         });
+    }
+    catch(e) {
+        console.log(e);
+    }
     });
 }
 

@@ -15,7 +15,7 @@ const prompts = {
     src='script.js'>. 
     6. Do NOT include any links to images. Your response should NOT have <img> tags
     7. If the site is primarily text-based, make it descriptive and thorough
-    8. keep in mind the specific css that might correspond to the task. 
+    8. keep in mind the specific css that might correspond to the task.
     Your task is: ${task}`,
     generate_html: task => `
     1. you response should be HTML. It should be a valid HTML file with no

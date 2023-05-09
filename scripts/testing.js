@@ -5,8 +5,31 @@ const { v3 } = require('./gpt3_v3');
 
 // The array of entries
 const prompts = [
-    "a tic tac toe game", 
-    "a todo list app"
+    "info page on mayonaise",
+    "interactive info page on mayonaise",
+    "daily inspirational quote app",
+    "fake call app",
+    "timer app",
+    "baby name generator",
+    "a tic tac toe game",
+    "20 questions game that tries to guess the user's word", 
+    "a todo list app",
+    "calendar app",
+    "simple runner game using blocks as sprites",
+    "guess the code game",
+    "simple pocket calculator",
+    "drawing app",
+    "scientific calculator",
+    "syllogism puzzle game",
+    "parameterized julia set visualizer",
+    "L-System visualizer",
+    "text editor",
+    "sudoku app",
+    "rhyme scheme highlighter on user given text",
+    "recipe generator based on given ingredients",
+    "classic snake game",
+    "soft body ball simulation",
+    "uno game"
 ];
 const tests_per_prompt = 1;
 
@@ -27,7 +50,7 @@ async function processProject(prompt, project_number, version) {
 async function processProjects() {
     const promises = [];
 
-    for (let version = 1; version <= 1; version++) {
+    for (let version = 1; version <= 2; version++) {
       let project_number = 1;
 
       for (const prompt of prompts) {

@@ -9,9 +9,10 @@ const path = require('path');
 
 async function v3(message, folder_name = 'chat-create-react-app') {
 
-    // if (message === undefined) {
-    //     message = await prompt('What would you like to create?\n\n')
-    // }
+    if (message === undefined) {
+        message = await prompt('What would you like to create?\n\n')
+        folder_name = await prompt('Under what folder?\n\n')
+    }
     // let message = await prompt('What would you like to create?\n\n');
     let expanded_task = await query(prompts['generate_expanded_task'](message));
 
@@ -77,5 +78,5 @@ async function create_component(expanded_task, component_name, JSON_hierarchy, p
     fs.writeFileSync(`${folder_name}/src/styles/${component_name}.css`, component_style, () => {});
 }
 // todo: get rid of array of functions
-// v3();
+ v3();
 module.exports = { v3 };

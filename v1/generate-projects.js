@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 // Define the number of folders you want to create
-const numberOfFolders = 24;
+const numberOfFolders = 25;
 
 // Loop through the range of folders to create
 for (let i = 1; i <= numberOfFolders; i++) {
